@@ -1,0 +1,25 @@
+resource "aws_ebs_volume" "example" {
+  availability_zone = "ap-southeast-2c"
+  size              = 10
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+
+resource "aws_ebs_snapshot" "example_snapshot" {
+  volume_id = aws_ebs_volume.example.id
+
+  tags = {
+    Name = "HelloWorld_snap"
+  }
+}
+
+resource "aws_ebs_snapshot_copy" "example_copy" {
+  source_snapshot_id = "snap-07778535efeebf1f5"
+  source_region      = "ap-southeast-2"
+
+  tags = {
+    Name = "HelloWorld_copy_snap"
+  }
+}
